@@ -1,0 +1,68 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  password  String
+  name      String
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  tours     Tour[]    @relation("CreatedTours")
+  bookings  Booking[]
+  reviews   Review[]
+}
+
+model Tour {
+  id            Int       @id @default(autoincrement())
+  destination   String
+  duration      Int
+  price         Float
+  type          TourType
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     User      @relation(fields: [createdById], references: [id])
+  createdById   Int
+  bookings      Booking[]
+  reviews       Review[]
+  isActive      Boolean   @default(true)
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  userId    Int
+  tourId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  tour      Tour     @relation(fields: [tourId], references: [id])
+}
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+  tour      Tour     @relation(fields: [tourId], references: [id])
+  tourId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum TourType {
+  HIKE
+  CULTURAL
+  WEEKEND_GETAWAY
+  OTHER
+}
