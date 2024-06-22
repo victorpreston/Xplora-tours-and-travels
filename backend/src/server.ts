@@ -7,6 +7,7 @@ import userProfileRoutes from './routes/userProfileRoutes';
 import tourRoutes from './routes/tourRoutes';
 import bookingRoutes from './routes/bookingRoutes';
 import reviewRoutes from './routes/reviewRoutes';
+import adminRoutes from './routes/adminRoutes';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use('/api/user', userProfileRoutes);
 app.use('/api', tourRoutes);
 app.use('/api', bookingRoutes);
 app.use('/api', reviewRoutes);
+app.use('/api', adminRoutes);
 
 app.get('/', (req, res) => {
   res.send('Xplora Tours and Travels API');

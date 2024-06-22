@@ -5,7 +5,7 @@ import { User, UserCredentials } from '../interfaces/userInterface';
 const prisma = new PrismaClient();
 
 export const createUser = async (data: User) => {
-  const { firstname, lastname, email, password } = data;
+  const { firstname, lastname, email, password, role } = data;
   const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.create({
@@ -14,6 +14,7 @@ export const createUser = async (data: User) => {
       lastname,
       email,
       password: hashedPassword,
+      role: role || 'user',  // Default role to 'user' if not provided
     },
   });
 

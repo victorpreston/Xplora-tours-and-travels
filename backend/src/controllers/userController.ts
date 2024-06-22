@@ -9,7 +9,7 @@ export const register = async (req: Request, res: Response) => {
   try {
     const user = await createUser(userData);
 
-    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ userId: user.userId, role: user.role }, process.env.JWT_SECRET!, {
       expiresIn: '1h',
     });
 
@@ -33,7 +33,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Invalid credentials.' });
     }
 
-    const token = jwt.sign({ userId: user.userId }, process.env.JWT_SECRET!, {
+    const token = jwt.sign({ userId: user.userId, role: user.role }, process.env.JWT_SECRET!, {
       expiresIn: '1h',
     });
 
