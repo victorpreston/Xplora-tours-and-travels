@@ -1,0 +1,33 @@
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import { PrismaClient } from '@prisma/client';
+import authRoutes from './routes/authRoutes';
+import userProfileRoutes from './routes/userProfileRoutes';
+import tourRoutes from './routes/tourRoutes';
+import bookingRoutes from './routes/bookingRoutes';
+import reviewRoutes from './routes/reviewRoutes';
+
+dotenv.config();
+
+const app = express();
+const prisma = new PrismaClient();
+
+app.use(cors());
+app.use(express.json());
+
+const PORT = process.env.PORT || 5000;
+
+app.use('/api/auth', authRoutes);
+app.use('/api/user', userProfileRoutes);
+app.use('/api', tourRoutes);
+app.use('/api', bookingRoutes);
+app.use('/api', reviewRoutes);
+
+app.get('/', (req, res) => {
+  res.send('Xplora Tours and Travels API');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
