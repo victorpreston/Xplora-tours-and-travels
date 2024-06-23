@@ -19,6 +19,9 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
+// Verify that JWT_SECRET is loaded correctly
+console.log('JWT_SECRET:', process.env.JWT_SECRET);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userProfileRoutes);
 app.use('/api', tourRoutes);

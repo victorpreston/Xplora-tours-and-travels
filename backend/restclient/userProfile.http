@@ -1,22 +1,54 @@
-### Get user profile
-GET http://localhost:5000/api/user/profile
-Authorization: Bearer {{USER_TOKEN}}
-
-### Update user profile
-PUT http://localhost:5000/api/user/profile
+### Register a new user
+POST http://localhost:5000/api/auth/register
 Content-Type: application/json
-Authorization: Bearer {{USER_TOKEN}}
 
 {
-  "firstname": "Updated",
-  "lastname": "User"
+  "firstname": "Test",
+  "lastname": "User",
+  "email": "test@example.com",
+  "password": "password123"
 }
 
-### Reset user password
-POST http://localhost:5000/api/user/reset-password
+###
+
+### Login as user
+POST http://localhost:5000/api/auth/login
 Content-Type: application/json
-Authorization: Bearer {{USER_TOKEN}}
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+###
+
+### Fetch user profile (needs token from login response)
+GET http://localhost:5000/api/user/profile
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzMjQ5MywiZXhwIjoxNzE5MTM2MDkzfQ.ypYwOy4n9eYQO38ummY7bXrnQnlHqk_muvXRQywYCRE"
+Content-Type: application/json
+
+###
+
+### Update user profile (needs token from login response)
+PUT http://localhost:5000/api/user/profile
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzMjQ5MywiZXhwIjoxNzE5MTM2MDkzfQ.ypYwOy4n9eYQO38ummY7bXrnQnlHqk_muvXRQywYCRE"
+Content-Type: application/json
+
+{
+  "firstname": "UpdatedFirstName",
+  "lastname": "UpdatedLastName",
+  "email": "test_updated@example.com"
+}
+
+###
+
+### Reset password (needs token from login response)
+PUT http://localhost:5000/api/user/reset-password
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzMjQ5MywiZXhwIjoxNzE5MTM2MDkzfQ.ypYwOy4n9eYQO38ummY7bXrnQnlHqk_muvXRQywYCRE"
+Content-Type: application/json
 
 {
   "newPassword": "newpassword123"
 }
+
+###

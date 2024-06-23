@@ -5,36 +5,49 @@ Content-Type: application/json
 {
   "firstname": "Test",
   "lastname": "User",
-  "email": "test@example.com",
+  "email": "mytest@example.com",
   "password": "password123"
 }
 
-### Register a new admin
-POST http://localhost:5000/api/auth/register
-Content-Type: application/json
-
-{
-  "firstname": "Admin",
-  "lastname": "User",
-  "email": "admin@example.com",
-  "password": "adminpassword123",
-  "role": "admin"
-}
+###
 
 ### Login as user
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@example.com",
+  "email": "test_updated@example.com",
   "password": "password123"
 }
 
-### Login as admin
-POST http://localhost:5000/api/auth/login
+###
+
+### Fetch user profile (needs token from login response)
+GET http://localhost:5000/api/user/profile
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzNDE1MCwiZXhwIjoxNzE5MTM3NzUwfQ.s4kVw31nb5L742KR6OcZE_1YMl2BQsujwn8qn3Wrwd4"
+Content-Type: application/json
+
+###
+
+### Update user profile (needs token from login response)
+PUT http://localhost:5000/api/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzODM3MywiZXhwIjoxNzE5MTQxOTczfQ.NOmNRf4IPDOY6E74dlPGwgrwRTdZnbBRcvQuMOVvdoQ
 Content-Type: application/json
 
 {
-  "email": "admin@example.com",
-  "password": "adminpassword123"
+  "firstname": "UpdatedFirstName",
+  "lastname": "UpdatedLastName",
+  "email": "test_updated@example.com"
 }
+
+###
+
+### Reset password (needs token from login response)
+PUT  http://localhost:5000/api/user/reset-password
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMDEwMDE1OC0yYTUzLTRlNmMtODc2Ni1iZDE0MDI5MTUyZWMiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTEzOTI1MCwiZXhwIjoxNzE5MTQyODUwfQ.JmKk8xtk3o-EgtGxgQe_LJEnoGoJFbgKvZbgbDqdLkY
+Content-Type: application/json
+
+{
+  "newPassword": "newpassword123"
+}
+

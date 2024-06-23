@@ -14,7 +14,7 @@ model User {
   email         String    @unique
   password      String
   updatedAt     DateTime? @updatedAt
-  role          String    @default("user")
+  role           String    @default("user")
   accountStatus String    @default("active")
   isNotified    Boolean   @default(false)
   bookings      Booking[]

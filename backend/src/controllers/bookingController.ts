@@ -14,7 +14,7 @@ export const createBookingController = async (req: Request, res: Response) => {
 };
 
 export const getBookingsByUserController = async (req: Request, res: Response) => {
-  const userId = req.user.userId;
+  const userId = (req as any).user.userId;
 
   try {
     const bookings = await getBookingsByUser(userId);

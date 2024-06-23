@@ -1,0 +1,60 @@
+### Register a new user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Tests",
+  "lastname": "TestUser",
+  "email": "testuser@example.com",
+  "password": "userpassword123"
+}
+
+###
+
+### Login as user
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "userpassword123"
+}
+
+### Copy the token from the response and replace {{user_token}} with the actual token.
+### Copy the userId from the response and replace {{user_id}} with the actual user ID.
+
+###
+
+### Create a booking (user only)
+POST http://localhost:5000/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQzMjUxNC03MTNiLTRkMzktYTE2NC02ZmVkZmIyZDg3YjciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTE0Mjk4MiwiZXhwIjoxNzE5MTQ2NTgyfQ.JYlfggO2IdtQ_-WAP-9CN_tJTGsyp6h7GlUWUQCpdUo
+Content-Type: application/json
+
+{
+  "tourId": "91aebe1f-60b7-4969-82b2-6f8543599a90",
+  "userId": "90d32514-713b-4d39-a164-6fedfb2d87b7",
+  "numberOfPeople": 1
+}
+
+###
+
+### Get all bookings (user only)
+GET http://localhost:5000/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQzMjUxNC03MTNiLTRkMzktYTE2NC02ZmVkZmIyZDg3YjciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTE0Mjk4MiwiZXhwIjoxNzE5MTQ2NTgyfQ.JYlfggO2IdtQ_-WAP-9CN_tJTGsyp6h7GlUWUQCpdUo
+Content-Type: application/json
+
+###
+
+### Create a review (user only, after attending the event)
+POST http://localhost:5000/api/reviews
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MGQzMjUxNC03MTNiLTRkMzktYTE2NC02ZmVkZmIyZDg3YjciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxOTE0Mjk4MiwiZXhwIjoxNzE5MTQ2NTgyfQ.JYlfggO2IdtQ_-WAP-9CN_tJTGsyp6h7GlUWUQCpdUo
+Content-Type: application/json
+
+{
+  "tourId": "91aebe1f-60b7-4969-82b2-6f8543599a90",
+  "userId": "90d32514-713b-4d39-a164-6fedfb2d87b7",
+  "content": "Amazing tour! Had a great time.",
+  "rating": 5
+}
+
+###

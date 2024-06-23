@@ -1,0 +1,70 @@
+### Register a new admin user
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "firstname": "Admin",
+  "lastname": "User",
+  "email": "admin@example.com",
+  "password": "adminpassword123",
+  "role": "admin"
+}
+
+###
+
+### Login as admin
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "adminpassword123"
+}
+
+###
+
+### Create a new tour (admin only)
+POST http://localhost:5000/api/tours
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MGE3OTBiMi03MmQxLTQ3MjktOTQ0OS0xNWQ2M2FhOTg3MDYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTkxNDExNTAsImV4cCI6MTcxOTE0NDc1MH0.ZTDlZlHIdLt1qCDRrro30y2iUdGOBCTezcToXeAqvE8
+Content-Type: application/json
+
+{
+  "destination": "The Grand Canyon",
+  "description": "A thrilling gand adventure",
+  "price": 1500.00,
+  "tourType": "Viewing",
+  "startDate": "2024-07-01T08:00:00.000Z",
+  "endDate": "2024-07-05T18:00:00.000Z"
+}
+
+###
+
+### Get all tours
+GET http://localhost:5000/api/tours
+Content-Type: application/json
+
+###
+
+### Get a tour by ID
+GET http://localhost:5000/api/tours/91aebe1f-60b7-4969-82b2-6f8543599a90
+Content-Type: application/json
+
+###
+
+### Update a tour (admin only)
+PUT http://localhost:5000/api/tours/91aebe1f-60b7-4969-82b2-6f8543599a90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MGE3OTBiMi03MmQxLTQ3MjktOTQ0OS0xNWQ2M2FhOTg3MDYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTkxNDA2MDYsImV4cCI6MTcxOTE0NDIwNn0.ltNPBbTysWCmFRHVmBgauJLVcKo6paR-mlcOwsShea0
+Content-Type: application/json
+
+{
+  "description": "An updated description for the Mount Kenya tour.",
+  "price": 550.00
+}
+
+###
+
+### Delete a tour (admin only)
+DELETE http://localhost:5000/api/tours/91aebe1f-60b7-4969-82b2-6f8543599a90
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1MGE3OTBiMi03MmQxLTQ3MjktOTQ0OS0xNWQ2M2FhOTg3MDYiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MTkxNDA2MDYsImV4cCI6MTcxOTE0NDIwNn0.ltNPBbTysWCmFRHVmBgauJLVcKo6paR-mlcOwsShea0
+Content-Type: application/json
+
