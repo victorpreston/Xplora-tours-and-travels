@@ -1,7 +1,12 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 import { createUser, findUserByEmail, findUserById, updateUserProfile, resetPassword } from '../services/userService';
 import { User, UserCredentials } from '../interfaces/userInterface';
+
+interface AuthRequest extends Request {
+  user?: any;
+}
 
 export const register = async (req: Request, res: Response) => {
   const userData: User = req.body;
@@ -43,7 +48,10 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-export const getUserProfile = async (req: Request, res: Response) => {
+export const getUserProfile = async (req: AuthRequest, res: Response) => {
+  if (!req.user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   const userId = req.user.userId;
 
   try {
@@ -57,7 +65,10 @@ export const getUserProfile = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUserProfileController = async (req: Request, res: Response) => {
+export const updateUserProfileController = async (req: AuthRequest, res: Response) => {
+  if (!req.user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   const userId = req.user.userId;
   const userData: Partial<User> = req.body;
 
@@ -69,7 +80,10 @@ export const updateUserProfileController = async (req: Request, res: Response) =
   }
 };
 
-export const resetPasswordController = async (req: Request, res: Response) => {
+export const resetPasswordController = async (req: AuthRequest, res: Response) => {
+  if (!req.user) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
   const userId = req.user.userId;
   const { newPassword } = req.body;
 

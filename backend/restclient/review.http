@@ -1,0 +1,29 @@
+### Create a new review (user only)
+POST http://localhost:5000/api/reviews
+Content-Type: application/json
+Authorization: Bearer {{USER_TOKEN}}
+
+{
+  "content": "Great tour!",
+  "rating": 5,
+  "tourId": "{{TOUR_ID}}"
+}
+
+### Get reviews by tour
+GET http://localhost:5000/api/reviews/tour/{{TOUR_ID}}
+
+### Get review by ID
+GET http://localhost:5000/api/reviews/{{REVIEW_ID}}
+
+### Update a review (user only)
+PUT http://localhost:5000/api/reviews/{{REVIEW_ID}}
+Content-Type: application/json
+Authorization: Bearer {{USER_TOKEN}}
+
+{
+  "content": "Updated review"
+}
+
+### Delete a review (user only)
+DELETE http://localhost:5000/api/reviews/{{REVIEW_ID}}
+Authorization: Bearer {{USER_TOKEN}}

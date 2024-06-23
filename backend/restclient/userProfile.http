@@ -1,0 +1,22 @@
+### Get user profile
+GET http://localhost:5000/api/user/profile
+Authorization: Bearer {{USER_TOKEN}}
+
+### Update user profile
+PUT http://localhost:5000/api/user/profile
+Content-Type: application/json
+Authorization: Bearer {{USER_TOKEN}}
+
+{
+  "firstname": "Updated",
+  "lastname": "User"
+}
+
+### Reset user password
+POST http://localhost:5000/api/user/reset-password
+Content-Type: application/json
+Authorization: Bearer {{USER_TOKEN}}
+
+{
+  "newPassword": "newpassword123"
+}

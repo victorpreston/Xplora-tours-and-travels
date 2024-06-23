@@ -7,13 +7,14 @@ import {
   deleteTourController,
 } from '../controllers/tourController';
 import auth from '../middlewares/auth';
+import adminOnly from '../middlewares/roleMiddleware';
 
 const router = express.Router();
 
-router.post('/tours', auth, createTourController);
+router.post('/tours', auth, adminOnly, createTourController);
 router.get('/tours', getAllToursController);
 router.get('/tours/:id', getTourByIdController);
-router.put('/tours/:id', auth, updateTourController);
-router.delete('/tours/:id', auth, deleteTourController);
+router.put('/tours/:id', auth, adminOnly, updateTourController);
+router.delete('/tours/:id', auth, adminOnly, deleteTourController);
 
 export default router;
